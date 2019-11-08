@@ -22,3 +22,41 @@
 ;             RAM[11] : 2
 ;===============================================
 
+
+leaw $1, %A
+movw %A, $S     ; S = 1
+
+LOOP:
+
+leaw $4, %A     ; A = 4
+movw (%A), %D   ; D = RAM[4]
+
+addw %A, %S, %A ; A = 4 + 1  ; (%A) = RAM[5]
+
+subw (%A),%D, %D ; D = RAM[5] - RAM[4] 
+jl %D            ; Se for menor que 0, RAM[4] > RAM[5]
+nop
+
+leaw $2, %A
+movw %D, (%A)
+
+incw %S
+
+leaw $LOOP, %A
+jmp
+nop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
